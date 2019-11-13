@@ -1,0 +1,33 @@
+{
+  "name": "javascript-battleship",
+  "version": "1.0.0",
+  "description": "battleship project testing with jest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "server": "live-server",
+    "dev": "webpack --watch src/* --mode development",
+    "build": "webpack --mode production",
+    "scss": "node-sass --watch scss/main.scss -o css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ispirett/javascript-battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ispirett/javascript-battleship/issues"
+  },
+  "homepage": "https://github.com/Ispirett/javascript-battleship#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "node-sass": "^4.13.0",
+    "wepack": "^0.0.1",
+    "wepack-cli": "^0.0.1-security"
+  }
+}
