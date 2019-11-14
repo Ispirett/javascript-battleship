@@ -44,24 +44,79 @@ const GameBoard = () => {
     const placeShip = details => {
         // pos should be left right up or down
         let { letter, num, pos, shipLength } = details;
+        const  alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+        let index = alpha.indexOf(letter);
+        let counter = 0;
+        const assign = () =>{
+            if(shipLength <= counter){
+                index = alpha.indexOf(letter);
+                for (let i = 0; i < shipLength; i++) {
+                    board[alpha[index]][num] = shipMark;
+                    if(pos === 'right'){
+                        index+=1
+                    }
+                    else if(pos === 'left'){
+                        index-=1
+                    }
 
-        Constraints.slotTaken(letter, num);
-
-        if (num === 9 && shipLength > 1) {
-            if (slot(letter, num) !== "S") {
-                num = 0;
-                pos = "down";
+                }
             }
-        }
-
-        if (letter === "a" && /[0-8]/.test(num) && /down|right/.test(pos)) {
-            for (let i = 0; i < shipLength; i++) {
-                board[letter][num] = shipMark;
-                num += 1;
+            else{
+                return  'Can\'t play there'
             }
-        } else {
-            return "pos";
-        }
+        };
+        const leftRight = () => {
+            if (pos === 'right') {
+                for (let i = 0; i < 3; i++) {
+                    if (alpha[index] !== undefined) {
+                        if (slot(alpha[index], num) !== "S") {
+                            counter++;
+                            index++
+                        }
+                    }
+                }
+            }
+               else if (pos === 'left') {
+                    for (let i = 3; i >= 0; i--) {
+                        if (alpha[index] !== undefined) {
+                            if (slot(alpha[index], num) !== "S") {
+                                counter++;
+                                index-= 1;
+                                console.log(index)
+                            }
+                        }
+
+                    }
+                }
+                assign()
+
+
+        };
+        leftRight()
+
+
+
+
+
+        //
+        // if (/[SX]/.test(slot(letter, num))) return "position taken";
+        //
+        // if (num === 9 && shipLength > 1) {
+        //     if (slot(letter, num) !== "S") {
+        //         num = 0;
+        //
+        //         pos = "down";
+        //     }
+        // }
+        //
+        // if (letter === "a" && /[0-8]/.test(num) && /down|right/.test(pos)) {
+        //     for (let i = 0; i < shipLength; i++) {
+        //         board[letter][num] = shipMark;
+        //         num += 1;
+        //     }
+        // } else {
+        //     return "pos";
+        // }
     };
 
     return {

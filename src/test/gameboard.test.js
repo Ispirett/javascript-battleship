@@ -30,18 +30,77 @@ describe("Recieve attack functionalities", () => {
     });
 });
 
-describe("testing ship placement functionality", () => {
+describe("testing ship placement functionality right", () => {
     const playerBoard = Gameboard();
     test("should add a ship of 3 to the board", () => {
-        playerBoard.placeShip({ letter: "a", num: 0, pos: "down", shipLength: 3 });
-        expect(playerBoard.slot("a", 0)).toBe("S");
-        expect(playerBoard.slot("a", 1)).toBe("S");
-        expect(playerBoard.slot("a", 2)).toBe("S");
+        playerBoard.placeShip({ letter: "b", num: 4, pos: "right", shipLength: 3 });
+        expect(playerBoard.slot("b", 4)).toBe("S");
+        expect(playerBoard.slot("c", 4)).toBe("S");
+        expect(playerBoard.slot("d", 4)).toBe("S");
     });
 
-    test("should return error if slot is already taken", () => {
-        expect(
-            playerBoard.placeShip({ letter: "a", num: 0, pos: "down", shipLength: 3 })
-        ).toBe("position taken");
+    test("should add a ship of 2 to the board", () => {
+        playerBoard.placeShip({ letter: "c", num: 5, pos: "right", shipLength: 2 });
+        expect(playerBoard.slot("c", 5)).toBe("S");
+        expect(playerBoard.slot("d", 5)).toBe("S");
+
     });
+
+    test("should add a ship of 1 to the board", () => {
+        playerBoard.placeShip({ letter: "c", num: 6, pos: "right", shipLength: 1 });
+        expect(playerBoard.slot("c", 6)).toBe("S");
+
+    });
+
+    test("should add a ship  at the end of the  board", () => {
+        playerBoard.placeShip({ letter: "i", num: 6, pos: "right", shipLength: 2 });
+        expect(playerBoard.slot("i", 6)).toBe("S");
+        expect(playerBoard.slot("j", 6)).toBe("S");
+    });
+
+});
+
+describe("testing ship placement functionality left", () => {
+    const playerBoardTwo = Gameboard();
+    test("should add a ship of 3 to the board", () => {
+        playerBoardTwo.placeShip({ letter: "c", num: 4, pos: "left", shipLength: 3 });
+        expect(playerBoardTwo.slot("c", 4)).toBe("S");
+        expect(playerBoardTwo.slot("b", 4 )).toBe("S");
+        expect(playerBoardTwo.slot("a", 4)).toBe("S");
+    });
+
+    test("should add a ship of 3 to the board", () => {
+        playerBoardTwo.placeShip({ letter: "b", num: 5, pos: "left", shipLength: 2 });
+        expect(playerBoardTwo.slot("b", 5)).toBe("S");
+        expect(playerBoardTwo.slot("a", 5 )).toBe("S");
+    });
+
+    test("should add a ship of 1 to the board", () => {
+        playerBoardTwo.placeShip({ letter: "a", num: 6, pos: "left", shipLength: 1 });
+        expect(playerBoardTwo.slot("a", 6 )).toBe("S");
+    });
+
+    test("should add a ship of 1 to the board", () => {
+        expect(playerBoardTwo.placeShip(
+            { letter: "b", num: 7, pos: "left", shipLength: 3 })).toEqual(undefined);
+
+    });
+
+
+
+
+
+    //
+    // test("should add a ship of 1 to the board", () => {
+    //     playerBoard.placeShip({ letter: "c", num: 6, pos: "right", shipLength: 1 });
+    //     expect(playerBoard.slot("c", 6)).toBe("S");
+    //
+    // });
+    //
+    // test("should add a ship  at the end of the  board", () => {
+    //     playerBoard.placeShip({ letter: "i", num: 6, pos: "right", shipLength: 2 });
+    //     expect(playerBoard.slot("i", 6)).toBe("S");
+    //     expect(playerBoard.slot("j", 6)).toBe("S");
+    // });
+
 });
