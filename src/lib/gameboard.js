@@ -13,14 +13,14 @@ const GameBoard = () => {
 
   const slot = (letter, num) => board[letter][num];
 
-  const Constraints = (() => {
-    // eslint-disable-next-line no-unused-vars
-    const slotTaken = (l, n) =>
-      /[SX]/.test(slot(l, n)) ? "position taken" : 0;
-    return {
-      slotTaken
-    };
-  })();
+  const Logger = (msg,result) =>{
+      return{
+          msg,
+          result
+      }
+  };
+
+
 
   const recieveAttack = details => {
     const { letter, num } = details;
@@ -47,65 +47,74 @@ const GameBoard = () => {
     const alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
     let index = alpha.indexOf(letter);
     let counter = 0;
+    const shipPosition = [];
+
     const assign = () => {
       if (shipLength <= counter) {
-        index = alpha.indexOf(letter);
         for (let i = 0; i < shipLength; i++) {
             if (/left|right/.test(pos)) {
                 board[alpha[index]][num] = shipMark;
+                shipPosition.push({letter:alpha[index], num});
                 if (pos === "right") {
                     index += 1;
                 } else if (pos === "left") {
                     index -= 1;
                 }
+
             }
-            else {
+            if(/up|down/.test(pos)) {
                 board[letter][num] = shipMark;
-                if (pos === 'up'){
+                shipPosition.push({letter, num});
+                if (pos === 'down'){
                     num++
                 }
-                else if (pos === 'down'){
+                else if (pos === 'up'){
                     num--
                 }
             }
+
+        }
+        const log = Logger('success', true);
+        return {
+            log,
+            shipPosition
         }
       } else {
-        return `you can only place a ship of `;
+        return Logger(`you can only place a ship of ${counter} length` , false);
       }
     };
+
     const leftRight = () => {
+        let currentIndex = index;
       if (pos === "right") {
         for (let i = 0; i < 3; i++) {
-          if (alpha[index] !== undefined) {
-            if (slot(alpha[index], num) !== "S") {
+          if (alpha[currentIndex] !== undefined) {
+            if (slot(alpha[currentIndex], num) !== "S") {
               counter++;
-              index++;
+              currentIndex++;
             }
           }
         }
       } else if (pos === "left") {
         for (let i = 3; i >= 0; i--) {
-          if (alpha[index] !== undefined) {
-            if (slot(alpha[index], num) !== "S") {
+          if (alpha[currentIndex] !== undefined) {
+            if (slot(alpha[currentIndex], num) !== "S") {
               counter++;
-              index -= 1;
+              currentIndex -= 1;
             }
-          }
-          else if(alpha[index] === undefined){
-              return `Only ship length of ${counter} can go here`
           }
         }
       }
-      assign();
     };
 
     const upDown = () => {
+        let currentNum = num;
         if (pos === "down") {
             for (let i = 0; i < 3; i++) {
-                if (slot(letter, num) !== undefined) {
-                    if (slot(letter, num) !== "S") {
+                if (slot(letter, currentNum) >= 0) {
+                    if (slot(letter, currentNum) !== "S") {
                         counter++;
-                        num++;
+                        currentNum++;
                     }
                     else{
                         return false;
@@ -113,22 +122,21 @@ const GameBoard = () => {
                 }
             }
         }
-
         else if (pos ==='up'){
             for (let i = 3; i >= 0; i--) {
-                if (slot(letter, num) !== undefined) {
-                    if (slot(alpha[index], num) !== "S") {
+                if (slot(letter, currentNum) >= 0) {
+                    if (slot(letter, currentNum) !== "S") {
                         counter++;
-                        num--;
+                        currentNum--;
                     }
                 }
             }
         }
-        assign()
     };
+
     leftRight();
     upDown();
-
+    return assign();
   };
 
   return {
