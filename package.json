@@ -4,7 +4,7 @@
     "description": "battleship project testing with jest.",
     "main": "index.js",
     "scripts": {
-        "test": "jest --watch src/* ",
+        "test": "jest --watch src/*",
         "server": "live-server",
         "dev": "webpack --watch src/* --mode development",
         "build": "webpack --mode production",

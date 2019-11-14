@@ -104,3 +104,16 @@ describe("testing ship placement functionality left", () => {
     // });
 
 });
+
+
+describe("testing ship placement functionality down", () => {
+    const newBoard = Gameboard()
+
+    test("should add a ship of 3 to the board", () => {
+        newBoard.placeShip({ letter: "c", num: 0, pos: "down", shipLength: 3 });
+        expect(newBoard.slot("c", 0)).toBe("S");
+        expect(newBoard.slot("c", 1)).toBe("S");
+        expect(newBoard.slot("c", 2)).toBe("S");
+    });
+
+});
