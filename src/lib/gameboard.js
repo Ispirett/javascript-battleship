@@ -27,19 +27,26 @@ const GameBoard = () => {
     const pos = slot(letter, num);
 
     // eslint-disable-next-line no-unused-vars
-    let updatePos = board[letter];
-    if (/[\d]/.test(pos)) {
+    // let updatePos = board[letter];
       if (pos === shipMark) {
-        updatePos[num] = boardHit;
-        return { hit: letter, pos: updatePos[num] };
-      } else {
-        updatePos[num] = boardHit;
-        return { hit: letter, pos: updatePos[num] };
+        return  Logger('ship',{  letter, num });
       }
-    } else {
+      if(/\d/.test(pos)) {
+        updateBoard({letter, num, icon: boardHit });
+        return Logger('X',{  letter, num  });
+      }
+
       return "position taken";
-    }
+
   };
+
+    // eslint-disable-next-line no-unused-vars
+  const updateBoard = (details) => {
+      const {letter, num, icon} = details;
+      board[letter][num] = icon
+  };
+
+
 
   const placeShip = details => {
     // pos should be left right up or down
@@ -143,7 +150,8 @@ const GameBoard = () => {
     board,
     recieveAttack,
     placeShip,
-    slot
+    slot,
+    updateBoard
   };
 };
 

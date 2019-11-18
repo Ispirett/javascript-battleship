@@ -11,9 +11,9 @@ describe("testing board setup", () => {
 describe("Recieve attack functionalities", () => {
   const playerOne = Gameboard();
   test("spot should be marked as position taken", () => {
-    playerOne.recieveAttack({ letter: "a", num: 1 });
+    playerOne.recieveAttack({ letter: "a", num: 0 });
     playerOne.recieveAttack({ letter: "j", num: 9 });
-    expect(playerOne.recieveAttack({ letter: "a", num: 1 })).toEqual(
+    expect(playerOne.recieveAttack({ letter: "a", num: 0 })).toEqual(
       "position taken"
     );
 
@@ -23,10 +23,7 @@ describe("Recieve attack functionalities", () => {
   });
 
   test("Ensure board is being updated when player plays", () => {
-    expect(playerOne.recieveAttack({ letter: "b", num: 1 })).toEqual({
-      hit: "b",
-      pos: "X"
-    });
+    expect(playerOne.recieveAttack({ letter: "b", num: 0 }).msg).toEqual('X');
   });
 });
 
@@ -198,10 +195,12 @@ describe("testing getting ship cordinates", () => {
         .shipPosition
     ).toEqual([{ letter: "j", num: 7 }, { letter: "i", num: 7 }]);
   });
-    test("should  return the ships position ship length 2", () => {
+    test("should  return the ships position ship length 1 ", () => {
         expect(
             newBoard.placeShip({ letter: "j", num: 6, pos: "left", shipLength: 1 })
                 .shipPosition
         ).toEqual([{ letter: "j", num: 6 }]);
     });
 });
+
+
