@@ -6,42 +6,42 @@
 //  S
 //  X
 // eslint-disable-next-line no-unused-vars
-const ShipManager = () =>{
-    let shipArray = [];
-    const ships = () => shipArray;
+const ShipManager = () => {
+  let shipArray = [];
+  const ships = () => shipArray;
 
-    const addShip = (ship, shipPos) =>{
-        shipArray.push({ship, shipPos})
-    };
+  const addShip = (ship, shipPos) => {
+    shipArray.push({ ship, shipPos })
+    return ships().length;
+  };
 
-    const removeShip = (index) =>{
-        shipArray.splice(index,1);
-        return true
-    };
+  const removeShip = (index) => {
+    shipArray.splice(index, 1);
+    return true
+  };
 
-    const shipTracker = (reciveAttack ) => {
-        ships.forEach((e, index) =>{
-            //get access to ship positions
-            e.shipPos.forEach(sp =>{
-                if(reciveAttack.msg === 'ship'){
-                    if(sp === reciveAttack.result){
-                        if(e.ship.hit() === undefined ){
-                            removeShip(index)
-                        }
-                    }
-                }
-            })
-        })
+  const shipTracker = (reciveAttack) => {
+    ships().forEach((e, index) => {
+      //get access to ship positions
+      e.shipPos.forEach(sp => {
+        if (reciveAttack.msg === 'ship') {
+          if (sp.letter === reciveAttack.result.letter && sp.num === reciveAttack.result.num) {
+            if (e.ship.hit() === e.ship.shipLength()) {
+              console.log(true);
+              removeShip(index);
+            }
+          }
+        }
+      })
+    })
 
-    };
+  };
 
-    return{
-        ships,
-        addShip,
-        shipTracker
-
-    }
-
+  return {
+    ships,
+    addShip,
+    shipTracker
+  }
 };
 
 export default ShipManager

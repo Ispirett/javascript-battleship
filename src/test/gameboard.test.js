@@ -195,12 +195,12 @@ describe("testing getting ship cordinates", () => {
         .shipPosition
     ).toEqual([{ letter: "j", num: 7 }, { letter: "i", num: 7 }]);
   });
-    test("should  return the ships position ship length 1 ", () => {
-        expect(
-            newBoard.placeShip({ letter: "j", num: 6, pos: "left", shipLength: 1 })
-                .shipPosition
-        ).toEqual([{ letter: "j", num: 6 }]);
-    });
+  test("should  return the ships position ship length 1 ", () => {
+    expect(
+      newBoard.placeShip({ letter: "j", num: 6, pos: "left", shipLength: 1 })
+        .shipPosition
+    ).toEqual([{ letter: "j", num: 6 }]);
+  });
 });
 
 
