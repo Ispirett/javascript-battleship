@@ -11,8 +11,12 @@ const ShipManager = () => {
   const ships = () => shipArray;
 
   const addShip = (ship, shipPos) => {
-    shipArray.push({ ship, shipPos })
+    shipArray.push({ ship, shipPos });
     return ships().length;
+  };
+
+  const updateShipPos = (index, newShipPos) =>{
+    shipArray[index].shipPos =  newShipPos
   };
 
   const removeShip = (index) => {
@@ -40,7 +44,8 @@ const ShipManager = () => {
   return {
     ships,
     addShip,
-    shipTracker
+    shipTracker,
+    updateShipPos
   }
 };
 

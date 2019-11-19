@@ -29,11 +29,15 @@ const GameBoard = () => {
     // eslint-disable-next-line no-unused-vars
     // let updatePos = board[letter];
       if (pos === shipMark) {
+        updateBoard({letter, num, icon: boardHit});
         return  Logger('ship',{  letter, num });
       }
       if(/\d/.test(pos)) {
         updateBoard({letter, num, icon: boardHit });
         return Logger('X',{  letter, num  });
+      }
+      if(pos === boardHit){
+          return false
       }
 
       return "position taken";
