@@ -75,32 +75,54 @@ const GUI = (() => {
     }
   })();
 
-  const boardSlots =  () =>{
-    const ships = document.querySelectorAll('.slot');
+  const boardSlots = (className,callback) =>{
+    const ships = document.querySelectorAll(`.${className}`);
     ships.forEach( slot =>{
       const letter = slot.getAttribute('data-letter');
       const num = slot.getAttribute('data-number');
-      // callback({letter,num})
-      if(p1Board.slot(letter,num) === "S"){
-        slot.classList.add('blue')
-      }
+      callback({letter,num, slot});
     })
   };
 
-  // const shipSetup = () =>{
-  //   boardSlots((props) =>{
-  //     console.log(p1Board.slot( ))
-  //   })
-  //
-  // };
+  const shipSetup = () =>{
+    boardSlots('slot',(props) =>{
+      if(p1Board.slot(props.letter,props.num) === "S"){
+        props.slot.classList.add('blue')
+      }
+    });
+    boardSlots('slot_two',(props) =>{
+      if(p2Board.slot(props.letter,props.num) === "S"){
+        props.slot.classList.add('blue')
+      }
+    })
 
+  };
 
+ const handleAttack = () =>{
+    boardSlots('slot_two',props => {
+      props.slot.onclick = (e) =>{
+       p2Ships.shipTracker(
+
+           p2Board.recieveAttack({letter:props.letter,num:props.num}), ishit =>{
+             if(ishit === 'hit'){
+               console.log("hit");
+               e.target.classList.add('red')
+             }
+             else if(ishit === 'miss') {
+               console.log("miss");
+               e.target.classList.add('brown')
+             }
+           });
+         }
+    })
+ };
 
 
 
 
   return {
-    boardSlots,
+    handleAttack,
+    shipSetup,
     playerBoards,
     displayPLayerInfo
   };
