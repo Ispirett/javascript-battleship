@@ -103,19 +103,24 @@ const GUI = (() => {
       props.slot.onclick = (e) =>{
        p2Ships.shipTracker(
 
-           p2Board.recieveAttack({letter:props.letter,num:props.num}), ishit =>{
-             if(ishit === 'hit'){
+           p2Board.recieveAttack({letter:props.letter,num:props.num}), isHit =>{
+             if(isHit === 'hit'){
                console.log("hit");
                e.target.classList.add('red')
              }
-             else if(ishit === 'miss') {
+             else if(isHit === 'miss') {
                console.log("miss");
                e.target.classList.add('brown')
              }
+           }, destroy =>{
+               if(destroy === "destroyed"){
+                 console.log('destroyed',p2Ships.ships().length)
+               }
            });
          }
     })
  };
+
 
 
 

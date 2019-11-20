@@ -24,14 +24,14 @@ const ShipManager = () => {
     return true
   };
 
-  const shipTracker = (reciveAttack,ishit,destroyed) => {
-
+  const shipTracker = (reciveAttack,isHit,destroyed) => {
+    isHit("miss");
     ships().forEach((e, index) => {
       //get access to ship positions
       e.shipPos.forEach(sp => {
         if (reciveAttack.msg === 'ship') {
           if (sp.letter === reciveAttack.result.letter && sp.num === Number(reciveAttack.result.num)) {
-              ishit("hit");
+              isHit("hit");
             if (e.ship.hit() === e.ship.shipLength()) {
               removeShip(index);
               try{
@@ -40,14 +40,11 @@ const ShipManager = () => {
               catch (e) {
                 return e
               }
-
               return true
             }
           }
         }
-        else{
-          ishit("miss")
-        }
+
       })
     })
 
