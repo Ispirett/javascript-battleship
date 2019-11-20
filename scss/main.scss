@@ -1,0 +1,18 @@
+.container{
+  width: 80%;
+  margin:  auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+.player, .player-two{
+  display: grid;
+  grid-template-columns: repeat(10 ,4fr);
+  width: 40em;
+  div{
+    border: 1px solid red ;
+    height: 2em;
+  }
+}

@@ -2,11 +2,10 @@
     "name": "javascript-battleship",
     "version": "1.0.0",
     "description": "battleship project testing with jest.",
-    "main": "index.js",
     "scripts": {
         "test": "jest --watch src/*",
         "server": "live-server",
-        "dev": "webpack --watch src/* --mode development",
+        "dev": "webpack --watch src/index.js --mode development",
         "build": "webpack --mode production",
         "scss": "node-sass --watch scss/main.scss -o css"
     },
@@ -28,7 +27,10 @@
         "eslint": "^6.6.0",
         "jest": "^24.9.0",
         "node-sass": "^4.13.0",
-        "wepack": "^0.0.1",
-        "wepack-cli": "^0.0.1-security"
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "sparetime.js": "^1.0.5"
     }
 }
