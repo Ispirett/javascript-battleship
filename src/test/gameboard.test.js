@@ -1,34 +1,36 @@
-import Gameboard from "../lib/gameboard.js";
+import GameBoard from "../lib/gameboard.js";
 
 describe("testing board setup", () => {
   test("board should be initialized properly", () => {
-    expect(Gameboard().slot("a", 9)).toBe(10);
-    expect(Gameboard().slot("b", 1)).toBe(2);
-    expect(Gameboard().slot("j", 3)).toBe(4);
+    expect(GameBoard().slot("a", 9)).toBe(10);
+    expect(GameBoard().slot("b", 1)).toBe(2);
+    expect(GameBoard().slot("j", 3)).toBe(4);
   });
 });
 
 describe("Recieve attack functionalities", () => {
-  const playerOne = Gameboard();
+  const playerOne = GameBoard();
+
   test("spot should be marked as position taken", () => {
     playerOne.recieveAttack({ letter: "a", num: 0 });
     playerOne.recieveAttack({ letter: "j", num: 9 });
-    expect(playerOne.recieveAttack({ letter: "a", num: 0 })).toEqual(
-      "position taken"
-    );
+    expect(playerOne.recieveAttack({ letter: "a", num: 0 })).toEqual("position taken");
+
+    expect(playerOne.slot('a','0')).toEqual('X');
 
     expect(playerOne.recieveAttack({ letter: "j", num: 9 })).toEqual(
       "position taken"
     );
-  });
+   });
 
   test("Ensure board is being updated when player plays", () => {
     expect(playerOne.recieveAttack({ letter: "b", num: 0 }).msg).toEqual('X');
   });
+
 });
 
 describe("testing ship placement functionality right", () => {
-  const playerBoard = Gameboard();
+  const playerBoard = GameBoard();
   test("should add a ship of 3 to the board", () => {
     playerBoard.placeShip({ letter: "b", num: 4, pos: "right", shipLength: 3 });
     expect(playerBoard.slot("b", 4)).toBe("S");
@@ -55,7 +57,7 @@ describe("testing ship placement functionality right", () => {
 });
 
 describe("testing ship placement functionality left", () => {
-  const playerBoardTwo = Gameboard();
+  const playerBoardTwo = GameBoard();
   test("should add a ship of 3 to the board", () => {
     playerBoardTwo.placeShip({
       letter: "c",
@@ -102,7 +104,7 @@ describe("testing ship placement functionality left", () => {
 });
 
 describe("testing ship placement functionality down", () => {
-  let newBoard = Gameboard();
+  let newBoard = GameBoard();
 
   test("should add a ship of length 3 to the board down", () => {
     newBoard.placeShip({ letter: "c", num: 0, pos: "down", shipLength: 3 });
@@ -140,7 +142,7 @@ describe("testing ship placement functionality down", () => {
 });
 
 describe("testing ship placement functionality up", () => {
-  let newBoard = Gameboard();
+  let newBoard = GameBoard();
 
   test("should add a ship of length 3 to the board up", () => {
     newBoard.placeShip({ letter: "c", num: 3, pos: "up", shipLength: 3 });
@@ -178,7 +180,7 @@ describe("testing ship placement functionality up", () => {
 });
 
 describe("testing getting ship cordinates", () => {
-  const newBoard = Gameboard();
+  const newBoard = GameBoard();
   test("should  return the ships position ship length 3", () => {
     expect(
       newBoard.placeShip({ letter: "j", num: 8, pos: "left", shipLength: 3 })

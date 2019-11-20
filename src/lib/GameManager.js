@@ -22,8 +22,10 @@ import GameBoard from "./gameboard";
 
 const GameManager = (() => {
   // eslint-disable-next-line no-unused-vars
+  //Global
   const markLogs = [];
-
+  const p1Board = GameBoard();
+  const p2Board = GameBoard();
   // eslint-disable-next-line no-unused-vars
   const playerManager = () => {
     const playerOne = (name) => Player(name);
@@ -35,11 +37,11 @@ const GameManager = (() => {
   };
   const boardManager = () => {
     const playerOneBoard = () => {
-      return GameBoard()
+      return p1Board
     };
 
     const playerTwoBoard = () => {
-      return GameBoard()
+      return p2Board
     };
 
     return {
@@ -51,13 +53,13 @@ const GameManager = (() => {
   const playerShips = () => {
     const playerOneShips = () => {
       const shipDetails =
-        [{ letter: 'a', num: 1, pos: 'down', shipLength: 3 },
+        [{ letter: 'a', num: 4  , pos: 'down', shipLength: 3 },
         { letter: 'b', num: 2, pos: 'right', shipLength: 3 },
         { letter: 'j', num: 9, pos: 'up', shipLength: 2 },
-        { letter: 'e', num: 3, pos: 'up', shipLength: 2 },
-        { letter: 'd', num: 1, pos: 'down', shipLength: 1 }
+        { letter: 'e', num: 5, pos: 'up', shipLength: 2 },
+        { letter: 'g', num: 1, pos: 'down', shipLength: 1 }
         ];
-      const p1Board = boardManager();
+
       const p1Fleet = ShipManager();
       shipDetails.forEach((e, i) => {
         p1Fleet.addShip(Ship(e.shipLength), p1Board.placeShip(shipDetails[i]).shipPosition);
@@ -73,7 +75,6 @@ const GameManager = (() => {
         { letter: 'e', num: 3, pos: 'up', shipLength: 2 },
         { letter: 'd', num: 1, pos: 'down', shipLength: 1 }
         ];
-      const p2Board = boardManager().playerTwoBoard();
       const p2Fleet = ShipManager();
       shipDetails.forEach((e, i) => {
         p2Fleet.addShip(Ship(e.shipLength), p2Board.placeShip(shipDetails[i]).shipPosition);

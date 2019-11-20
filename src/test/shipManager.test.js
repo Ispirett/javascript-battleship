@@ -23,13 +23,13 @@ describe('testing shipManager functionalities', () => {
     expect(shipManager.addShip(ship5, ship5pos)).toBe(5);
   });
   test('shipTracker should remove a ship if ship was sunk', () => {
-    console.log(shipManager.ships());
+    //console.log(shipManager.ships());
     const attackDetail1 = [{letter: 'b', num: 3}, {letter: 'c', num: 3}, {letter: 'd', num: 3}];
     const attackDetail2 = [{letter: 'c', num: 4}, {letter: 'c', num: 5}];
     const attackDetail3 = [{letter: 'g', num: 2}];
     const attackDetail4 = [{letter: 'a', num: 7}, {letter: 'a', num: 6}, {letter: 'a', num: 5}];
     const attackDetail5 = [{letter: 'j', num: 8}, {letter: 'i', num: 8}, {letter: 'h', num: 8}];
-    console.log(gameBoard.board)
+   // console.log(gameBoard.board)
     expect(shipManager.ships().length).toBe(5);
     shipManager.shipTracker(gameBoard.recieveAttack(attackDetail1[0]));
     shipManager.shipTracker(gameBoard.recieveAttack(attackDetail1[1]));

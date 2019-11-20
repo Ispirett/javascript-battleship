@@ -5,14 +5,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
 }
 .player, .player-two{
-  display: grid;
-  grid-template-columns: repeat(10 ,4fr);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  //grid-template-columns: repeat(10 ,4fr);
   width: 40em;
+  height: 30em;
   div{
+    box-sizing: border-box;
     border: 1px solid red ;
-    height: 2em;
+    height: 3em;
+    width: 4em;
   }
+}
+.blue{
+  background-color: #177ed6;
 }

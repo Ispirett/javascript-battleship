@@ -2,42 +2,109 @@ import GameManager from './GameManager';
 import spare from 'sparetime.js';
 spare();
 
+// Setup Board
+// Display ships on board =>  Add color class to element when S is matched
+// Allow player to update ship position board
+// Create update Loop
+// Player one should be able to attack
+// Player two should be able to attack
+// Update board after attack
+// repeat attack until one player ship fleet is demolished
+
 const GUI = (() => {
+  const p1Board = GameManager.boardManager().playerOneBoard();
+  const p2Board = GameManager.boardManager().playerTwoBoard();
+  const p1Ships = GameManager.playerShips().playerOneShips();
+  const p2Ships = GameManager.playerShips().playerTwoShips();
+  let p1 = null;
+  const p2 =  GameManager.playerManager().playerTwo();
+
+
 
   const playerBoards = () => {
-    const p1Board = GameManager.boardManager().playerOneBoard().board;
-    const p2Board = GameManager.boardManager().playerTwoBoard().board;
-
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-
     const p1Container = Spare.sel('#player').element;
     const p2Container = Spare.sel('#player-two').element;
-
+ /// lettter  a num 0 , b num 0
     letters.forEach((letter) => {
-      p1Board[letter].forEach((num) => {
+      p1Board.board[letter].forEach((num, index) => {
+
+
         const square = Spare.create('div')
           .attr('data-letter', letter)
-          .attr('data-number', num)
-          .attr('id', `${letter}-${num}`)
+          .attr('data-number', index)
+          .attr('id', `${letter}-${index}`).attr('class','slot' )
           .element;
         p1Container.append(square);
 
       });
-      p2Board[letter].forEach((num) => {
+      p2Board.board[letter].forEach((num, index_two) => {
         const square = Spare.create('div')
           .attr('data-letter', letter)
-          .attr('data-number', num)
-          .attr('id', `${letter}-${num}-2`)
+          .attr('data-number', index_two)
+          .attr('id', `${letter}-${index_two}-2`).attr('class', 'slot_two')
           .element;
         p2Container.append(square);
       });
     });
-
-
-  }
-  return {
-    playerBoards
   };
+
+  const displayPLayerInfo = (() =>{
+    const setPlayerNames = () =>
+    {
+      const p1name = Spare.sel('#p1-name').element;
+      const p2name = Spare.sel('#p2-name').element;
+      // const nameInput = Spare.sel('#name-input').value()
+      p1 = GameManager.playerManager().playerOne('Destroyer');
+      p1name.innerText = p1.playerName();
+      p2name.innerText = p2.playerName();
+      return{
+        scores
+      }
+    };
+
+    const scores = () =>{
+      const p1score = Spare.sel('#p1-score').element;
+      const p2score = Spare.sel('#p2-score').element;
+      p1score.innerText = `${p1Ships.ships().length}  ships`;
+      p2score.innerText = `${p2Ships.ships().length}  ships`;
+    };
+    return{
+      setPlayerNames,
+      scores
+    }
+  })();
+
+  const boardSlots =  () =>{
+    const ships = document.querySelectorAll('.slot');
+    ships.forEach( slot =>{
+      const letter = slot.getAttribute('data-letter');
+      const num = slot.getAttribute('data-number');
+      // callback({letter,num})
+      if(p1Board.slot(letter,num) === "S"){
+        slot.classList.add('blue')
+      }
+    })
+  };
+
+  // const shipSetup = () =>{
+  //   boardSlots((props) =>{
+  //     console.log(p1Board.slot( ))
+  //   })
+  //
+  // };
+
+
+
+
+
+
+  return {
+    boardSlots,
+    playerBoards,
+    displayPLayerInfo
+  };
+
 })();
 
 export default GUI;

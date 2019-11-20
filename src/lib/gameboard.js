@@ -32,12 +32,12 @@ const GameBoard = () => {
         updateBoard({letter, num, icon: boardHit});
         return  Logger('ship',{  letter, num });
       }
-      if(/\d/.test(pos)) {
+      else if(/\d/.test(pos)) {
         updateBoard({letter, num, icon: boardHit });
         return Logger('X',{  letter, num  });
       }
-      if(pos === boardHit){
-          return false
+      else if(pos === boardHit){
+          return "position taken";
       }
 
       return "position taken";
