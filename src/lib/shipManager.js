@@ -25,7 +25,7 @@ const ShipManager = () => {
   };
 
   const shipTracker = (reciveAttack,isHit,destroyed) => {
-    isHit("miss");
+    if(reciveAttack.msg === 'X') return isHit('miss');
     ships().forEach((e, index) => {
       //get access to ship positions
       e.shipPos.forEach(sp => {
@@ -44,7 +44,6 @@ const ShipManager = () => {
             }
           }
         }
-
       })
     })
 
