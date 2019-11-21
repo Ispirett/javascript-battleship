@@ -47,7 +47,7 @@ Enter name and click play
 ## Authors
 
 * **Isaac Browne** - *Initial work* - [Ispirett](https://github.com/isprett)
-* **Sergio Torres** - *Initial work* - [Ispirett](https://github.com/isprett)
+* **Sergio Torres** - *Initial work* - [Sergio](https://github.com/sergio)
 
 
 
