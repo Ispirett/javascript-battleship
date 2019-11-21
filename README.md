@@ -39,6 +39,10 @@ Enter name and click play
 * javascript
 * Webpack
 * jest
+* scss
+* node-sass
+* webpack
+* sparetime.js
 
 ## Authors
 
