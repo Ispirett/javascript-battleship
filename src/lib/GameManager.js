@@ -28,7 +28,7 @@ const GameManager = (() => {
   const p2Board = GameBoard();
   // eslint-disable-next-line no-unused-vars
   const playerManager = () => {
-    const playerOne = (name) => Player(name);
+    const playerOne = (name = "Player One") => Player(name);
     const playerTwo = (name = "Magnetron") => Player(name);
     return {
       playerOne,

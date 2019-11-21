@@ -17,7 +17,7 @@ const GameBoard = () => {
     return {
       msg,
       result
-    }
+    };
   };
 
   const recieveAttack = details => {
@@ -28,27 +28,22 @@ const GameBoard = () => {
     // let updatePos = board[letter];
     if (pos === shipMark) {
       updateBoard({ letter, num, icon: boardHit });
-      return Logger('ship', { letter, num });
-    }
-    else if (/\d/.test(pos)) {
+      return Logger("ship", { letter, num });
+    } else if (/\d/.test(pos)) {
       updateBoard({ letter, num, icon: boardHit });
-      return Logger('X', { letter, num });
-    }
-    else if (pos === boardHit) {
+      return Logger("X", { letter, num });
+    } else if (pos === boardHit) {
       return "position taken";
     }
 
     return "position taken";
-
   };
 
   // eslint-disable-next-line no-unused-vars
-  const updateBoard = (details) => {
+  const updateBoard = details => {
     const { letter, num, icon } = details;
-    board[letter][num] = icon
+    board[letter][num] = icon;
   };
-
-
 
   const placeShip = details => {
     // pos should be left right up or down
@@ -69,25 +64,22 @@ const GameBoard = () => {
             } else if (pos === "left") {
               index -= 1;
             }
-
           }
           if (/up|down/.test(pos)) {
             board[letter][num] = shipMark;
             shipPosition.push({ letter, num });
-            if (pos === 'down') {
-              num++
-            }
-            else if (pos === 'up') {
-              num--
+            if (pos === "down") {
+              num++;
+            } else if (pos === "up") {
+              num--;
             }
           }
-
         }
-        const log = Logger('success', true);
+        const log = Logger("success", true);
         return {
           log,
           shipPosition
-        }
+        };
       } else {
         return Logger(`you can only place a ship of ${counter} length`, false);
       }
@@ -124,14 +116,12 @@ const GameBoard = () => {
             if (slot(letter, currentNum) !== "S") {
               counter++;
               currentNum++;
-            }
-            else {
+            } else {
               return false;
             }
           }
         }
-      }
-      else if (pos === 'up') {
+      } else if (pos === "up") {
         for (let i = 3; i >= 0; i--) {
           if (slot(letter, currentNum) >= 0) {
             if (slot(letter, currentNum) !== "S") {
