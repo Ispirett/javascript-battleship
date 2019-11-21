@@ -89,7 +89,7 @@ const GUI = (() => {
 
     boardSlots('slot_two', (props) => {
       if (p2Board.slot(props.letter, props.num) === "S") {
-        props.slot.classList.add('blue')
+        // props.slot.classList.add('blue')
       }
     })
   };

@@ -31,12 +31,13 @@ const ShipManager = () => {
       e.shipPos.forEach(sp => {
         if (reciveAttack.msg === 'ship') {
           if (sp.letter === reciveAttack.result.letter && sp.num === Number(reciveAttack.result.num)) {
-             try {
-               isHit("hit");
-             }
-             catch (e) {
-               return e
-             }
+              try {
+                isHit("hit");
+              }
+              catch (e) {
+                
+              }
+               
             if (e.ship.hit() === e.ship.shipLength()) {
               removeShip(index);
               try{

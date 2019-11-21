@@ -69,10 +69,10 @@ const GameManager = (() => {
 
     const playerTwoShips = () => {
       const shipDetails =
-        [{ letter: 'a', num: 1, pos: 'down', shipLength: 3 },
-        { letter: 'b', num: 2, pos: 'right', shipLength: 3 },
+        [{ letter: 'a', num: 4, pos: 'down', shipLength: 3 },
+        { letter: 'h', num: 2, pos: 'right', shipLength: 3 },
         { letter: 'j', num: 9, pos: 'up', shipLength: 2 },
-        { letter: 'e', num: 3, pos: 'up', shipLength: 2 },
+        { letter: 'e', num: 4, pos: 'up', shipLength: 2 },
         { letter: 'd', num: 1, pos: 'down', shipLength: 1 }
         ];
       const p2Fleet = ShipManager();
@@ -87,28 +87,6 @@ const GameManager = (() => {
       playerTwoShips
     }
   };
-
-  const playerSwitcher = () => {
-    let turn = 2;
-    const playerTurn = turn % 2 === 0 ? playerManager().playerOne() : playerManager().playerTwo()
-    turn++;
-    return {
-      turn,
-      playerTurn
-    };
-  };
-
-  // Utils
-  const AttackLogger = (name, position) => {
-    markLogs.push({ name, position });
-  }
-
-  const play = () => {
-    while (playerShips().playerOneShips().ships().length > 0
-      && playerShips().playerTwoShips().ships().length > 0) {
-        const currentPlayer = playerSwitcher();
-      }
-  }
 
   return {
     boardManager,
