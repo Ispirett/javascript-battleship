@@ -154,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst GameBoard = () => {\n  
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst Player = name => {\n  const playerName = () => name;\n\n  const randomNum = () => Math.round(Math.random() * 9);\n\n  const letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"];\n\n  const randomMove = () => {\n    return {\n      num: randomNum(),\n      letter: letters[randomNum()]\n    };\n  };\n  \n  return {\n    playerName,\n    randomMove\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Player);\n\n//# sourceURL=webpack:///./src/lib/player.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst Player = name => {\n  const playerName = () => name;\n\n  const letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\"];\n\n  const createPossibleChoices = () => {\n    const arrChoices = []\n  \n    letters.map((letter) => {\n      for (let i = 0; i < 10; i++) {\n        arrChoices.push(new Array(`${letter}`, i));\n      }\n    });\n    return arrChoices;\n  }\n  \n  const possibleChoices = createPossibleChoices();\n\n  const randomMove = () => {\n    const randomNum =  Math.round(Math.random() * (possibleChoices.length - 1));\n    const value = possibleChoices.splice(randomNum, 1)[0];\n    return {\n      letter: value[0],\n      num: value[1]\n    };\n  }\n  \n  return {\n    playerName,\n    randomMove\n  };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Player);\n\n//# sourceURL=webpack:///./src/lib/player.js?");
 
 /***/ }),
 
