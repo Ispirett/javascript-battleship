@@ -1,3 +1,9 @@
+body{
+  background-image: url("https://i.pinimg.com/originals/a9/3c/70/a93c70e7def50471956f07b3c179a255.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
 .container{
   width: 80%;
   margin:  auto;
@@ -5,6 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
 }
 .player, .player-two{
   //background: linear-gradient(90deg, #2193B0 0%, #6DD5ED 100%);
@@ -30,6 +37,28 @@
     }
   }
 }
+.details{
+  color: white;
+  background: black;
+  padding: 1em;
+  border-radius: .5em;
+}
+#input-name,#input-name-two{
+  border-radius: 1em;
+  height: 2em;
+  padding: .2em;
+  outline: none;
+  border: none;
+  border-bottom: 4px solid #2193B0;
+  background: transparent;
+  color: white ;
+
+}
+
+.mb-2{
+  margin-bottom: 2em;
+}
+
 .blue{
   background: #000C40;
   border: 1px solid #000C40 !important;
@@ -67,5 +96,4 @@
   .player{
     margin-bottom: 2em;
   }
-
 }

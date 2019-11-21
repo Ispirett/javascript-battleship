@@ -1,11 +1,4 @@
-// ship array , each ship has an index
 
-// index 0
-//  a b c d
-//  S
-//  S
-//  X
-// eslint-disable-next-line no-unused-vars
 const ShipManager = () => {
   let shipArray = [];
   const ships = () => shipArray;
@@ -25,13 +18,25 @@ const ShipManager = () => {
   };
 
   const shipTracker = (reciveAttack,isHit,destroyed) => {
-    if(reciveAttack.msg === 'X') return isHit('miss');
+    if(reciveAttack.msg === 'X') {
+      try{
+        return isHit('miss');
+      }
+      catch (e) {
+        return  e
+      }
+    }
     ships().forEach((e, index) => {
       //get access to ship positions
       e.shipPos.forEach(sp => {
         if (reciveAttack.msg === 'ship') {
           if (sp.letter === reciveAttack.result.letter && sp.num === Number(reciveAttack.result.num)) {
-              isHit("hit");
+             try {
+               isHit("hit");
+             }
+             catch (e) {
+               return e
+             }
             if (e.ship.hit() === e.ship.shipLength()) {
               removeShip(index);
               try{
@@ -58,5 +63,4 @@ const ShipManager = () => {
 };
 
 export default ShipManager
-// loop through ships an match object and update ship length
-// eslint-disable-next-line no-unused-vars
+

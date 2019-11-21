@@ -47,21 +47,21 @@ const GUI = (() => {
   };
 
   const displayPLayerInfo = (() => {
+    const p1input = Spare.sel('#input-name').element;
+    const p1name = Spare.sel('#p1-name').element;
+    const p2name = Spare.sel('#p2-name').element;
+    const p1score = Spare.sel('#p1-score').element;
+    const p2score = Spare.sel('#p2-score').element;
     const setPlayerNames = () => {
-      const p1name = Spare.sel('#p1-name').element;
-      const p2name = Spare.sel('#p2-name').element;
       // const nameInput = Spare.sel('#name-input').value()
-      p1 = GameManager.playerManager().playerOne('Destroyer');
+      p1 = GameManager.playerManager().playerOne(p1input.value);
       p1name.innerText = p1.playerName();
       p2name.innerText = p2.playerName();
       return {
         scores
       }
     };
-
     const scores = () => {
-      const p1score = Spare.sel('#p1-score').element;
-      const p2score = Spare.sel('#p2-score').element;
       p1score.innerText = `${p1Ships.ships().length}  ships`;
       p2score.innerText = `${p2Ships.ships().length}  ships`;
     };
@@ -98,9 +98,7 @@ const GUI = (() => {
     boardSlots('slot_two', props => {
       props.slot.onclick = (e) => {
         p2Ships.shipTracker(
-
           p2Board.recieveAttack({ letter: props.letter, num: props.num }), isHit => {
-
             if (isHit === 'hit') {
               console.log("hit");
               e.target.classList.add('red');
@@ -114,6 +112,8 @@ const GUI = (() => {
           }, destroy => {
             if (destroy === "destroyed") {
               console.log('destroyed', p2Ships.ships().length)
+              displayPLayerInfo.scores();
+              gameOver()
             }
           });
       }
@@ -121,10 +121,7 @@ const GUI = (() => {
   };
 
   const pcHandleAttack = () => {
-
     const getSlot = (letter, num) => Spare.sel(`#${letter}-${num.toString()}`).element;
-
-      setTimeout(() => {
         const { num, letter } = p2.randomMove();
         p1Ships.shipTracker(
           p1Board.recieveAttack({ letter, num }), isHit => {
@@ -139,16 +136,47 @@ const GUI = (() => {
           }, destroy => {
             if (destroy === 'destroyed') {
               console.log('destroyed', p1Ships.ships().length);
+              displayPLayerInfo.scores();
+              gameOver()
             }
           });
-      }, 1000);
-  }
+  };
+
+
+  const gameOver = () => {
+    const displayPrompt = (name) =>{
+      if( prompt(`GameOver,${name}, win!!! Would you like to play again? type yes to play again.`) === 'yes'){
+        location.reload()
+      }
+      else{
+        window.close()
+      }
+    };
+    const winner = () => {
+      if (p1Ships.ships().length === 0)
+      {
+        displayPrompt(p2.playerName())
+      }
+      else if(p2Ships.ships().length === 0){
+        displayPrompt(p1.playerName())
+      }
+    };
+    return winner()
+
+  };
+
+  const play = () =>{
+   const button =Spare.sel('#play').element
+    button.onclick = () =>{
+      playerBoards();
+      displayPLayerInfo.setPlayerNames().scores();
+      shipSetup();
+      handleAttack();
+    }
+  };
 
   return {
-    handleAttack,
-    shipSetup,
-    playerBoards,
-    displayPLayerInfo,
+    play
   };
 })();
 
