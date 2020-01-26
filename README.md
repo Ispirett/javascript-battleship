@@ -2,6 +2,8 @@
 
 #### Retro battleship Game made with javascript and node, tested with jest.
 
+### [Visit Game](https://ispirett.github.io/javascript-battleship/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
